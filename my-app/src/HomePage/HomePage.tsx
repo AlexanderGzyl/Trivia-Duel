@@ -24,20 +24,20 @@ return(
         <Content>
             <Logo>banner/img/logo</Logo>
             <Prompt>Select a category</Prompt>
-            <Button id = "History"
+            <Button id = "history"
                     tabIndex="0"
                     aria-label="History Category"
                     type="button"  
                     onClick={ (event)=>handleCategoryNav(event)}>History</Button>
-            <Button id = "Music"
+            <Button id = "music"
                     aria-label="Music Category"
                     type="button"    
                     onClick={ (event)=>handleCategoryNav(event)}>Music</Button>
-            <Button id = "Film"
+            <Button id = "film_and_tv"
                     aria-label="Film Category"
                     type="button"    
                     onClick={ (event)=>handleCategoryNav(event)}>Film</Button>
-            <Button id = "Culture"
+            <Button id = "society_and_culture"
                     aria-label="Culture Category" 
                     type="button"   
                     onClick={ (event)=>handleCategoryNav(event)}>Culture</Button>
@@ -57,7 +57,6 @@ const Content = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
-
 text-align:center;
 `;
 const Logo = styled.div`
