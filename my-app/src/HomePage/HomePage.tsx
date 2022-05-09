@@ -18,6 +18,7 @@ const HomePage = () =>{
         event.preventDefault()
         navigate("/Trivia", {state : event.currentTarget.id})
     }
+    //conditionally render sign in prompt
 
 return(
     <Wrapper>
