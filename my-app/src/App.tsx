@@ -6,7 +6,11 @@ import HomePage from './HomePage/HomePage';
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import Trivia from './Trivia/Trivia'
+import Signin from './SignIn/SignIn';
 import GlobalStyles from './GlobalStyles';
+import Protected from './SignIn/Protected';
+
+
 function App() {
   return (
     <>
@@ -16,7 +20,8 @@ function App() {
       <Header/>
         <Routes>
           <Route path="/" element={<HomePage/>} />
-          <Route path="/trivia" element={<Trivia/>} />
+          <Route path='/signin' element={<Signin />} />
+          <Route path="/trivia" element={<Protected><Trivia/></Protected>} />
         </Routes>
       <Footer/>
       </AppWrapper>
