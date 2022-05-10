@@ -8,7 +8,7 @@ import {
     onAuthStateChanged 
 } from 'firebase/auth';
 import { auth } from '../Firebase'
-import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from 'constants';
+
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({children})=> {

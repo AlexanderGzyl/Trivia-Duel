@@ -16,7 +16,7 @@ const HomePage = () =>{
     function handleCategoryNav(event:any) {
         event.stopPropagation();
         event.preventDefault()
-        navigate("/Trivia", {state : event.currentTarget.id})
+        navigate("/trivia", {state : event.currentTarget.id})
     }
     //conditionally render sign in prompt
 

@@ -9,6 +9,7 @@ import Trivia from './Trivia/Trivia'
 import Signin from './SignIn/SignIn';
 import GlobalStyles from './GlobalStyles';
 import Protected from './SignIn/Protected';
+import Arena from './Arena/Arena';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path='/signin' element={<Signin />} />
+          <Route path='/arena' element={<Arena />} />
           <Route path="/trivia" element={<Protected><Trivia/></Protected>} />
         </Routes>
       <Footer/>
