@@ -4,10 +4,13 @@ import {useLocation} from 'react-router-dom';
 import styled from "styled-components";
 import { fetchQuizQuestions } from "./FetchQuestions";
 import TriviaCard from "./TriviaCard"
+import { useNavigate } from "react-router-dom";
+
 //add start button
 //start button disappears and begins the timer
 //fetch the quiz data on render
 const Trivia = () =>{
+    const navigate = useNavigate()
     //states
     //states trigger rerender
     //use reducers?memo?break up state and functions
@@ -24,7 +27,7 @@ const Trivia = () =>{
     //constants
     //get selected Trivia category from homepage
     const location = useLocation();
-console.log("hi")
+
     //functions
     const startTrivia = async () => {
         setLoading(true);
@@ -72,6 +75,9 @@ console.log("hi")
         console.log(userAnswers)
         setTime((endTime-startTime)/1000)
         console.log(score)
+        //navigate to arena
+        navigate("/arena",{state : questions})
+        //put setTime in quizcontext
     }
 
     return(
@@ -96,7 +102,7 @@ console.log("hi")
         ) : null}
 {gameOver && !loading && userAnswers.length === 5 ? (
 <Button onClick ={Result}>
-    {time}
+    enter arena
 </Button>) : null}
 </Content>
 </Wrapper>
