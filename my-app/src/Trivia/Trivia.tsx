@@ -1,29 +1,28 @@
 // @ts-nocheck
-import React, { useState } from "react"
+import React, { useState,useContext } from "react"
 import {useLocation} from 'react-router-dom';
 import styled from "styled-components";
 import { fetchQuizQuestions } from "./FetchQuestions";
 import TriviaCard from "./TriviaCard"
 import { useNavigate } from "react-router-dom";
+import { QuizContext } from "../Context/QuizContext";
 
 //add start button
 //start button disappears and begins the timer
 //fetch the quiz data on render
 const Trivia = () =>{
+    const {questions, setQuestions,setTime,score,setScore} = useContext(QuizContext);
     const navigate = useNavigate()
     //states
     //states trigger rerender
     //use reducers?memo?break up state and functions
     const [loading, setLoading] = useState(false);
-    const [questions, setQuestions] = useState([]);
     const [gameOver, setGameOver] = useState(true);
     const [userAnswers,setUserAnswers] = useState([]);
     const [questionNumber,setQuestionNumber] = useState(0);
     const [clicked,setClicked] = useState(false);
     const [startTime,setStartTime] = useState([]);
     const [endTime,setEndtime] = useState([])
-    const [time,setTime] = useState([])
-    const [score,setScore] = useState(0);
     //constants
     //get selected Trivia category from homepage
     const location = useLocation();
@@ -76,7 +75,7 @@ const Trivia = () =>{
         setTime((endTime-startTime)/1000)
         console.log(score)
         //navigate to arena
-        navigate("/arena",{state : questions})
+        navigate("/arena")
         //put setTime in quizcontext
     }
 

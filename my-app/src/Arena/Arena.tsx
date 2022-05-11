@@ -1,19 +1,23 @@
 // @ts-nocheck
-import React, { useState } from "react"
+import React, { useContext,useEffect } from "react"
 import styled from "styled-components";
-import {useLocation} from 'react-router-dom';
+import { QuizContext } from "../Context/QuizContext";
 import { UserAuth } from '../Context/AuthContext'
 const { v4: uuidv4 } = require('uuid');
 const Arena = () => {
-    const location = useLocation();
+    const {questions,time,score, setQuizID, quizID} = useContext(QuizContext);
     const {user} = UserAuth();
-    const data = {
-        _id: uuidv4(),
-        quiz: location.state,
-        user: user,
-        score:2,
-        time:2
+    useEffect(() => {
+        setQuizID(uuidv4())
+    }, []);
+    let data = {
+        _id: quizID,
+        quiz: questions,
+        user: user.email,
+        score:score,
+        time:time
     };
+    
     const challenge = () => {
         fetch('/add-quiz', {
             method: 'POST',

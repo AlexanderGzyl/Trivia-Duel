@@ -1,15 +1,38 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { UserAuth } from '../Context/AuthContext'
 
 //to do
 //add names and keyboard nav too buttons
 const HomePage = () =>{
-
+    const { user } = UserAuth();
     const navigate = useNavigate()
 
     //Handlers
+    useEffect(() => {
+        if (user != null) {
+          //check if user exists and/or create user
+          //user data
+    let data = {
+      _id: user.uid,
+      challenges: [],
+      email: user.email,
+      wins:0,
+      loses:0,
+      quizzes:[]
+    };
+          fetch('/add-user', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { "Content-Type": "application/json" },
+        });
+          console.log(user)
+          
+        }
+      }, []);
+    
     //Navigate to the trivia page based on the category chosen
     //The button id is passed as state to the next page 
     //in order to fetch the correct category fromm the api

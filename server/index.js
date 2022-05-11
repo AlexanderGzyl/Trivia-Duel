@@ -7,6 +7,10 @@ const {
     getQuizzes,
     addQuiz
 } = require('./Handlers/quizhandler');
+
+const { 
+    addUser
+} = require('./Handlers/userhandler')
 express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
@@ -24,6 +28,8 @@ express()
   //
 .get("/quiz/:_id", getQuizzes)
 .post('/add-quiz', addQuiz)
+//
+.post('/add-user', addUser)
   //
   // add new endpoints here ☝️
   // ---------------------------------

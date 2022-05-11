@@ -16,10 +16,12 @@ const Signin = () => {
       console.log(error);
     }
   };
-//fix navigation
+
+
   useEffect(() => {
     if (user != null) {
-      console.log(user)
+      //check if user exists and/or create user
+      //user data
       navigate('/');
     }
   }, [user]);
