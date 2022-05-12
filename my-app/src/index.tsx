@@ -6,14 +6,16 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import QuizProvider from './Context/QuizContext'
 import { AuthContextProvider } from './Context/AuthContext';
-
+import UserProvider from './Context/UserContext'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
+    <UserProvider>
     <QuizProvider>
     <App />
     </QuizProvider>
+    </UserProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
