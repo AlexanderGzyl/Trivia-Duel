@@ -1,14 +1,37 @@
 // @ts-nocheck
-import React, { useContext,useEffect } from "react"
+import React, { useContext,useEffect,useState } from "react"
 import styled from "styled-components";
 import { QuizContext } from "../Context/QuizContext";
 import { UserAuth } from '../Context/AuthContext'
+import ArenaUser from "./ArenaUser";
+import Loader from "../Utils/Loader";
+
 const { v4: uuidv4 } = require('uuid');
+
 const Arena = () => {
+    //app contexts
     const {questions,time,score, setQuizID, quizID} = useContext(QuizContext);
     const {user} = UserAuth();
+    //state
+    const [arenaUsers, setArenaUsers] = useState([])
+    //fetch arena users and create quiz payload
     useEffect(() => {
         setQuizID(uuidv4())
+        
+        fetch(`/arena-users/${user.uid}`)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(`Error! status: ${res.status}`);
+            }
+        })
+        .then((data) => {
+            setArenaUsers(data.data)
+        })
+        .catch((err) => {
+            console.error('Error', err);
+        })
     }, []);
     let data = {
         _id: quizID,
@@ -25,9 +48,22 @@ const Arena = () => {
             headers: { "Content-Type": "application/json" },
         });
     }
+    if(arenaUsers.length <= 0) {
+        return (
+          <LoaderWrapper>
+               <Loader />
+          </LoaderWrapper>
+        )
+      }
     return(
         <Wrapper>
             <Content>
+                <ArenaUsers>
+                   
+                {arenaUsers.map((arenaUser)=>{
+                    return <ArenaUser key ={arenaUser["_id"]} arenaUser = {arenaUser["email"]}></ArenaUser>
+                })}
+                </ArenaUsers>
                 <Button onClick ={challenge}> Submit Challenge</Button>
             </Content>
         </Wrapper>
@@ -55,7 +91,22 @@ const Button = styled.button`
     font-size:30px;
     height:20vw;
     width:50vw;
-    
     margin-bottom: 2%;
 `;
+
+const ArenaUsers = styled.div`
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+
+`;
+
+const LoaderWrapper = styled.div`
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+`
 export default Arena

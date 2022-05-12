@@ -5,8 +5,11 @@ import { UserAuth } from '../Context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
+
 const Signin = () => {
   const { googleSignIn, user } = UserAuth();
+  
+  
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
@@ -22,7 +25,27 @@ const Signin = () => {
     if (user != null) {
       //check if user exists and/or create user
       //user data
-      navigate('/');
+let data = {
+  _id: user.uid,
+  challenges: [],
+  email: user.email,
+  wins:0,
+  losses:0,
+  quizzes:[]
+};
+      fetch('/add-user', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => {
+      if (!res.status ==='200') {
+        throw Error("Server Error");
+      }
+      navigate('/')
+      return res.json();
+    })
+    .then(data => console.log(data.message))
     }
   }, [user]);
 
