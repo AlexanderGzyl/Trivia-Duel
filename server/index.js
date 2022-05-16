@@ -10,7 +10,8 @@ const {
 
 const { 
     addUser,
-    getArenaUsers
+    getArenaUsers,
+    addChallenge
 } = require('./Handlers/userhandler')
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -32,6 +33,7 @@ express()
 //
 .post('/add-user', addUser)
 .get("/arena-users/:_id",getArenaUsers)
+.patch("/add-challenges",addChallenge)
   //
   // add new endpoints here ☝️
   // ---------------------------------

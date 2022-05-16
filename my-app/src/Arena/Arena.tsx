@@ -13,7 +13,8 @@ const Arena = () => {
     const {questions,time,score, setQuizID, quizID} = useContext(QuizContext);
     const {user} = UserAuth();
     //state
-    const [arenaUsers, setArenaUsers] = useState([])
+    const [arenaUsers, setArenaUsers] = useState([]);
+    const [challenges,setChallenges] = useState([]);
     //fetch arena users and create quiz payload
     useEffect(() => {
         setQuizID(uuidv4())
@@ -40,7 +41,8 @@ const Arena = () => {
         score:score,
         time:time
     };
-    
+    //handlers
+    //post quiz to data base
     const challenge = () => {
         fetch('/add-quiz', {
             method: 'POST',
@@ -48,23 +50,53 @@ const Arena = () => {
             headers: { "Content-Type": "application/json" },
         });
     }
+    //add challenger
+    const addChallenge = (event:any) =>{
+        let id = event.currentTarget.id;
+        setChallenges(prev => [...prev, id])
+        console.log(challenges)
+    }
+    let challengeData = {
+        challengers:challenges,
+        _id: quizID,
+        quizID: quizID,
+        user: user.email,
+        completed:false
+    };
+    //submit challenges
+    const submitChallenge = () => {
+        fetch('/add-challenges', {
+            method: 'PATCH',
+            body: JSON.stringify(challengeData),
+            headers: { "Content-Type": "application/json" },
+        });
+    }
+
+    //submihandler
+    const handleSubmit = () => {
+        challenge();
+        submitChallenge()
+
+    }
     if(arenaUsers.length <= 0) {
         return (
-          <LoaderWrapper>
-               <Loader />
-          </LoaderWrapper>
+            <LoaderWrapper>
+                <Loader />
+            </LoaderWrapper>
         )
-      }
+    }
     return(
         <Wrapper>
             <Content>
                 <ArenaUsers>
-                   
                 {arenaUsers.map((arenaUser)=>{
-                    return <ArenaUser key ={arenaUser["_id"]} arenaUser = {arenaUser["email"]}></ArenaUser>
+                    return <Container key ={arenaUser["_id"]+"container"}>
+                        <ArenaUser key ={arenaUser["_id"]} arenaUser = {arenaUser["email"]}></ArenaUser>
+                        <Button onClick ={addChallenge} id ={arenaUser["_id"]} key ={arenaUser["_id"]+"button"} >Challenge</Button>
+                        </Container>
                 })}
                 </ArenaUsers>
-                <Button onClick ={challenge}> Submit Challenge</Button>
+                <Button onClick ={handleSubmit}> Submit Challenge</Button>
             </Content>
         </Wrapper>
     )
@@ -89,8 +121,8 @@ const Button = styled.button`
     margin-bottom: 2%;
     }
     font-size:30px;
-    height:20vw;
-    width:50vw;
+    height:10vh;
+    width:30vw;
     margin-bottom: 2%;
 `;
 
@@ -101,6 +133,11 @@ align-items:center;
 text-align:center;
 
 `;
+
+const Container = styled.div`
+    
+    
+`
 
 const LoaderWrapper = styled.div`
 height: 100vh;
