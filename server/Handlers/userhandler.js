@@ -63,7 +63,7 @@ const getArenaUsers = async (req, res) => {
     try {
       //get user IDs excluding the current user
       const userList = await db.collection("users").find(query,{projection:{email:1}}).toArray();
-      console.log(userList)
+      
 
       //find will return an empty array if it doesn't find anything...
       if (userList.length === 0) {
@@ -79,11 +79,40 @@ const getArenaUsers = async (req, res) => {
   };
 
 //on submitting a challenge in the arena
-//add to challenges array for challengers and
-//add to the quiz array for the user
+//add to challenges array for challengers
 //////////////////////////////////////////////////////////////////////
+const addChallenge = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("finalproject");
+    console.log("Connected");
+    console.log(req.body) 
+    const {challengers,_id,quizID,user,completed } = req.body;
+    let payload = {
+        _id : _id,
+        ...req.body,
+}
+    let query = {_id: {$in: challengers}}
+    let updateDocument ={
+        $push: { "challenges": payload }
+      }
 
+    try {
+      const result = await db.collection("users").updateMany(query,updateDocument);
+      console.log(result)
+        res.status(200).json({ status: 201,message: "user added", data: result });
+      
+    } catch (err) {
+        console.log(err)
+        // return res
+        // .status(404)
+        // .json({ status: 404, data: user, message: err.message });
+    }
+client.close();
+console.log("disconnected!");
+};
 module.exports = {
     addUser,
-    getArenaUsers
+    getArenaUsers,
+    addChallenge
 };
