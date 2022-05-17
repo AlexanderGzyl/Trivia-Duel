@@ -3,22 +3,17 @@ import React from 'react';
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
 import { UserAuth } from '../Context/AuthContext';
+import LogOut from './LogOut';
 
 
 //Header should have login logic with nav to profile page
 const Header = () =>{
     const {user, logOut} = UserAuth()
-    const handleSignOut = async () => {
-        try {
-            await logOut()
-        } catch (error) {
-            console.log(error)
-        }
-    }
+  
     return(
 <Wrapper>
     
-    {user?.displayName ? <button onClick = {handleSignOut}>Logout</button>:
+    {user?.displayName ? <LogOut/>:
     <Link to ='/signin'>Login</Link>}
     <p>Welcome {user?.displayName}</p>
 </Wrapper>

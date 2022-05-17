@@ -17,18 +17,25 @@ const getQuizzes = async (req, res) => {
     await client.connect();
     const db = client.db("finalproject");
     console.log("Connected");
-    const _id   = req.params._id;
-    await db.collection("quizzes").findOne({ _id }, (err, result) => {
-        result
-          ? res.status(200).json({
-              status: 200,
-              data: result,
-              message: `Successfully retrieved reservation #${_id}`,
-            })
-          : res
-              .status(404)
-              .json({ status: 404, data: _id, message: "Reservation not Found" });
-      });
+    const _id   = req.params.id;
+    const query = { "user.uid": `${ _id } `};
+    console.log(query)
+    try {
+        //get the data from server
+        const results = await db.collection("quizzes").find({"user.uid": `${ _id }`}).toArray();
+        console.log(results)
+        //reformat(routes) as input
+        
+        //find will return an empty array if it doesn't find anything...
+        if (results === 0) {
+            res.status(404).json({ status: 404, error: "array is empty" });
+        } else {
+            //seatcontext needs seats, numOfRows and seatsPerRow passed
+            res.status(200).json({status: 200, data: results});
+        }
+    } catch (err) {
+        console.log(err);
+    }
     client.close();
     console.log("disconnected!");
   };

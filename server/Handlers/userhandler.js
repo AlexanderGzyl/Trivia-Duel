@@ -111,8 +111,31 @@ const addChallenge = async (req, res) => {
 client.close();
 console.log("disconnected!");
 };
+//get user
+//////////////////////////////////////////////////////////////////////
+const getUser = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("finalproject");
+    console.log("Connected");
+    const _id   = req.params._id;
+    try {
+      const result = await db.collection("users").findOne({ _id });
+      // console.log(result['seats'])
+      if (result === null||result.length === 0||result === undefined){
+        res.status(404).json({ status: 404, error: "user doesn't exist" });
+      }else
+        {res.status(200).json({status: 200,_id, data: result});}
+        console.log("success")
+    } catch (err) {
+      console.log(err);
+    }
+    client.close();
+    console.log("disconnected!");
+};
 module.exports = {
     addUser,
     getArenaUsers,
-    addChallenge
+    addChallenge,
+    getUser
 };
