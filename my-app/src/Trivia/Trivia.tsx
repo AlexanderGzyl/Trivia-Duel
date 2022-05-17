@@ -47,7 +47,7 @@ const Trivia = () =>{
             const answer = event.currentTarget.value
             //check answer against the correct value
             const correct = questions[questionNumber].correctAnswer === answer;
-            if (correct){setScore(prev => [Number(prev)+1 ]);}
+            if (correct){setScore(prev => Number(prev)+1 );}
             //save user answer
             const answerObject = {
                 question: questions[questionNumber].question,

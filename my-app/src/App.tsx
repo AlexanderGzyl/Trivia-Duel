@@ -10,6 +10,7 @@ import Signin from './SignIn/SignIn';
 import GlobalStyles from './GlobalStyles';
 import Protected from './SignIn/Protected';
 import Arena from './Arena/Arena';
+import ProfilePage from './Profile/ProfilePage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path='/signin' element={<Signin />} />
           <Route path='/arena' element={<Protected><Arena /></Protected>} />
           <Route path="/trivia" element={<Protected><Trivia/></Protected>} />
+          <Route path="/profile/:id" element={<Protected><ProfilePage/></Protected>} />
         </Routes>
       <Footer/>
       </AppWrapper>
