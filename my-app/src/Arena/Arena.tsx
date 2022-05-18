@@ -37,6 +37,7 @@ const Arena = () => {
     let data = {
         _id: quizID,
         quiz: questions,
+        userID: user.uid,
         user: user.email,
         score:score,
         time:time

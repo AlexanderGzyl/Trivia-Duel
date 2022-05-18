@@ -28,7 +28,7 @@ const addUser = async (req, res) => {
     try {
       const result = await db.collection("users").findOne({ _id });
       console.log(result)
-      if (result.length === 0||result === null) {
+      if (result === null) {
         await db.collection("users").insertOne(user);
         res.status(201).json({ status: 201,message: "user added", data: user });
         console.log("added")
@@ -37,7 +37,7 @@ const addUser = async (req, res) => {
         res.status(200).json({ status: 200,message: "user exists already", data: user });
     }
     } catch (err) {
-        console.log("error")
+        console.log(err)
         // return res
         // .status(404)
         // .json({ status: 404, data: user, message: err.message });

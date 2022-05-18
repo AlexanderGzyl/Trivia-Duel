@@ -17,20 +17,19 @@ const ProfilePage = () =>{
         );
     }, []);
     console.log(userInfo)
+    console.log(userInfo.challenges)
     //loading
-    //once use loads get quiz info
-    //set id to email
-    if(loaded === true) {
-        fetch(`/quiz/${id}`).then((response) =>
-        response.json().then((json) => {
-            console.log(json.data);
-        })
-        );
-    }
+    // if(loaded === true) {
+    //     fetch(`/get-quizzes/${id}`).then((response) =>
+    //     response.json().then((json) => {
+    //         console.log(json.data);
+    //     })
+    //     );
+    // }
     return(
         <Wrapper>
             <Content>
-              
+            
             </Content>
         </Wrapper>
     )

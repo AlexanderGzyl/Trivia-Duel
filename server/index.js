@@ -4,6 +4,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const {
+    getQuiz,
     getQuizzes,
     addQuiz
 } = require('./Handlers/quizhandler');
@@ -29,7 +30,8 @@ express()
   // ---------------------------------
   // add new endpoints here 👇
   //
-.get("/quiz/:id", getQuizzes)
+.get("/get-quiz/:id",getQuiz)
+.get("/get-quizzes/:id", getQuizzes)
 .post('/add-quiz', addQuiz)
 //
 .post('/add-user', addUser)

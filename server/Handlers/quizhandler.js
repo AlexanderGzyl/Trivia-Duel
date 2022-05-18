@@ -10,15 +10,39 @@ const options = {
 };
 // use this package to generate unique ids: https://www.npmjs.com/package/uuid
 const { v4: uuidv4 } = require("uuid");
-
 //get quiz
+const getQuiz = async (res,req) => {
+    const client = new MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("finalproject");
+    console.log("Connected");
+    const _id   = req.params.id;
+    try {
+        //get the data from server
+        const results = await db.collection("quizzes").findOne({_id });
+        console.log(results)
+        //find will return an empty array if it doesn't find anything...
+        if (results === 0) {
+            res.status(404).json({ status: 404, error: "Quiz not found" });
+        } else {
+            //seatcontext needs seats, numOfRows and seatsPerRow passed
+            res.status(200).json({status: 200, data: results});
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    client.close();
+    console.log("disconnected!");
+
+}
+//get quizzes
 const getQuizzes = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("finalproject");
     console.log("Connected");
     const _id   = req.params.id;
-    const query = { "user.uid": `${ _id } `};
+    const query = { "userID": `${ _id }`};
     console.log(query)
     try {
         //get the data from server
@@ -65,6 +89,7 @@ const addQuiz = async (req, res) => {
 
 
 module.exports = {
+    getQuiz,
     getQuizzes,
     addQuiz
 };
