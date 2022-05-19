@@ -31,6 +31,8 @@ const Trivia = () =>{
     const startTrivia = async () => {
         setLoading(true);
         setGameOver(false);
+        setTime(0)
+        setScore(0)
         //fetch questions
         const newQuestions = await fetchQuizQuestions(location.state);
         setQuestions(newQuestions);

@@ -6,6 +6,7 @@ import { fetchChallenge } from "./FetchChallenge";
 import ChallengeCard from "./ChallengeCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { QuizContext } from "../Context/QuizContext";
+import { UserAuth } from "../Context/AuthContext";
 
 //add start button
 //start button disappears and begins the timer
@@ -13,7 +14,9 @@ import { QuizContext } from "../Context/QuizContext";
 const Challenge = () =>{
     const {questions, setQuestions,setTime,time,score,setScore} = useContext(QuizContext);
     const navigate = useNavigate()
+    //quiz id
     const { id } = useParams();
+    const {user} = UserAuth();
    
     //states
     //states trigger rerender
@@ -51,6 +54,8 @@ const Challenge = () =>{
         
         setLoading(true);
         setGameOver(false);
+        setTime(0)
+        setScore(0)
         //fetch challenge info gets passed id upon navigation from profile
         const challengeInfo = await fetchChallenge(id);
         //get question form info
@@ -106,23 +111,35 @@ const Challenge = () =>{
     const compareScore = ()=>{
         setTime((endTime-startTime)/1000)
         if (score < data.score) {
-            console.log("lose")
+            finalOutcome("lose")
+            
         } else if (score===data.score && time < data.time){
-            console.log("win")
+            finalOutcome("win")
+            
         } else{
-            console.log("win")
+            finalOutcome("win")
+            
         }
     }
 
-    const outcome = (outcome) =>{
-        //challengeid =
-        //userid =
-        //challeneger userid =
+    const finalOutcome = (endResult) =>{
+        let challengerId = data.userID;
+        let userId = user.uid;
+        let challengeId = id;
+        let outcome = endResult;
         //if outcome = win then user wins
-        //payload = {challengeid,userid,challengeruserid,win}
-        //backend
-        //update challenge either remove or set to false
-        //inc user 1 and inc challenger -1
+        let payload = {
+            challengerId:challengerId,
+            userId:userId,
+            challengeId:challengeId,
+            outcome:outcome
+        }
+        fetch('/update-challenges', {
+            method: 'PATCH',
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" },
+        });
+        
 
     }
 

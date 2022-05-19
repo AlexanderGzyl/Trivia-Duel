@@ -133,9 +133,70 @@ const getUser = async (req, res) => {
     client.close();
     console.log("disconnected!");
 };
+
+const updateChallenge = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalproject");
+  console.log("Connected");
+  console.log(req.body) 
+  const {challengerId,userId,challengeId,outcome} = req.body;
+
+
+  try {
+    if (outcome==='win') {
+      //update challenge userID,challengeId
+      let query = {
+        "_id": userId
+      }
+      let updateDocument = {
+        $pull: {
+          challenges: {
+            "_id": challengeId
+          }
+        }
+      }
+      const result = await db.collection("users").updateOne(query,updateDocument);
+      //add win userID
+      let query2 = {_id:userId}
+      let updateDocument2 ={
+        $inc: { "wins": 1 }
+      }
+      const result2 = await db.collection("users").updateOne(query2,updateDocument2);
+      //add loss challengerID
+      let query3 = {_id:challengerId}
+      let updateDocument3 ={
+        $inc: { "losses": 1 }
+      }
+      const result3 = await db.collection("users").updateOne(query3,updateDocument3);
+      res.status(200).json({ status: 201,message: "user added", data: result2 });
+    } else {
+            //update challenge userID,challengeId
+      //add win challengerID
+      let query2 = {_id:challengerId}
+      let updateDocument2 ={
+        $inc: { "wins": 1 }
+      }
+      const result2 = await db.collection("users").updateOne(query2,updateDocument2);
+      //add loss userID
+      let query3 = {_id:userId}
+      let updateDocument3 ={
+        $inc: { "losses": 1 }
+      }
+      const result3 = await db.collection("users").updateOne(query3,updateDocument3);
+      res.status(200).json({ status: 201,message: "user added", data: result2 });
+    }
+  } catch (err) {
+      console.log(err)
+  
+  }
+client.close();
+console.log("disconnected!");
+};
 module.exports = {
     addUser,
     getArenaUsers,
     addChallenge,
-    getUser
+    getUser,
+    updateChallenge
 };

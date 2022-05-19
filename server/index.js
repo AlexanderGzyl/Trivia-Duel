@@ -13,7 +13,8 @@ const {
     addUser,
     getArenaUsers,
     addChallenge,
-    getUser
+    getUser,
+    updateChallenge
 } = require('./Handlers/userhandler')
 express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -38,6 +39,7 @@ express()
 .get("/arena-users/:_id",getArenaUsers)
 .patch("/add-challenges",addChallenge)
 .get('/user/:_id',getUser)
+.patch(`/update-challenges`,updateChallenge)
   //
   // add new endpoints here ☝️
   // ---------------------------------
