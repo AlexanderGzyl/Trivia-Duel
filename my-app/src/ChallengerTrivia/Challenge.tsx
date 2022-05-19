@@ -2,7 +2,7 @@
 import React, { useState,useContext,useEffect } from "react"
 import {useLocation} from 'react-router-dom';
 import styled from "styled-components";
-
+import { fetchChallenge } from "./FetchChallenge";
 import ChallengeCard from "./ChallengeCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { QuizContext } from "../Context/QuizContext";
@@ -11,7 +11,7 @@ import { QuizContext } from "../Context/QuizContext";
 //start button disappears and begins the timer
 //fetch the quiz data on render
 const Challenge = () =>{
-    const {questions, setQuestions,setTime,score,setScore} = useContext(QuizContext);
+    const {questions, setQuestions,setTime,time,score,setScore} = useContext(QuizContext);
     const navigate = useNavigate()
     const { id } = useParams();
    
@@ -25,35 +25,37 @@ const Challenge = () =>{
     const [clicked,setClicked] = useState(false);
     const [startTime,setStartTime] = useState([]);
     const [endTime,setEndtime] = useState([])
+    const [data,setData] = useState([])
     //constants
     //get selected Trivia category from homepage
     const location = useLocation();
-    useEffect(() => {
-        fetch(`/get-quiz/${id}`)
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                throw new Error(`Error! status: ${res.status}`);
-            }
-        })
-        .then((data) => {
-            console.log(data.data.quiz)
-            setQuestions(data.data.quiz)
-        })
-        .catch((err) => {
-            console.error('Error', err);
-        })
-    }, []);
+    // useEffect(() => {
+    //     fetch(`/get-quiz/${id}`)
+    //     .then((res) => {
+    //         if (res.ok) {
+    //             return res.json();
+    //         } else {
+    //             throw new Error(`Error! status: ${res.status}`);
+    //         }
+    //     })
+    //     .then((data) => {
+    //         console.log(data.data.quiz)
+    //         setQuestions(data.data.quiz)
+    //     })
+    //     .catch((err) => {
+    //         console.error('Error', err);
+    //     })
+    // }, []);
     //functions
     const startTrivia = async () => {
-        console.log(questions)
+        
         setLoading(true);
         setGameOver(false);
         //fetch challenge info gets passed id upon navigation from profile
-        // const challengeInfo = await fetchChallenge(id);
+        const challengeInfo = await fetchChallenge(id);
         //get question form info
-        // setQuestions(challengeInfo.quiz);
+        setData(challengeInfo)
+        setQuestions(challengeInfo.quiz);
         setUserAnswers([])
         setQuestionNumber(0)
         setStartTime(new Date());
@@ -92,10 +94,36 @@ const Challenge = () =>{
 
     const Result = () => {
         console.log(userAnswers)
-        setTime((endTime-startTime)/1000)
+        compareScore()
+        // setTime((endTime-startTime)/1000)
         console.log(score)
+        console.log(data.score)
+        console.log(data.time)
         //compare scores function
         //update challenge to complete and update win lose for user and challenger in patch
+    }
+
+    const compareScore = ()=>{
+        setTime((endTime-startTime)/1000)
+        if (score < data.score) {
+            console.log("lose")
+        } else if (score===data.score && time < data.time){
+            console.log("win")
+        } else{
+            console.log("win")
+        }
+    }
+
+    const outcome = (outcome) =>{
+        //challengeid =
+        //userid =
+        //challeneger userid =
+        //if outcome = win then user wins
+        //payload = {challengeid,userid,challengeruserid,win}
+        //backend
+        //update challenge either remove or set to false
+        //inc user 1 and inc challenger -1
+
     }
 
     return(
