@@ -1,18 +1,20 @@
 // @ts-nocheck
-import React, { useState,useContext } from "react"
+import React, { useState,useContext,useEffect } from "react"
 import {useLocation} from 'react-router-dom';
 import styled from "styled-components";
-import { fetchChallenge } from "./FetchChallenge";
+
 import ChallengeCard from "./ChallengeCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { QuizContext } from "../Context/QuizContext";
 
 //add start button
 //start button disappears and begins the timer
 //fetch the quiz data on render
-const Trivia = () =>{
+const Challenge = () =>{
     const {questions, setQuestions,setTime,score,setScore} = useContext(QuizContext);
     const navigate = useNavigate()
+    const { id } = useParams();
+   
     //states
     //states trigger rerender
     //use reducers?memo?break up state and functions
@@ -26,15 +28,32 @@ const Trivia = () =>{
     //constants
     //get selected Trivia category from homepage
     const location = useLocation();
-
+    useEffect(() => {
+        fetch(`/get-quiz/${id}`)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(`Error! status: ${res.status}`);
+            }
+        })
+        .then((data) => {
+            console.log(data.data.quiz)
+            setQuestions(data.data.quiz)
+        })
+        .catch((err) => {
+            console.error('Error', err);
+        })
+    }, []);
     //functions
     const startTrivia = async () => {
+        console.log(questions)
         setLoading(true);
         setGameOver(false);
         //fetch challenge info gets passed id upon navigation from profile
-        const challengeInfo = await fetchChallenge(location.state);
+        // const challengeInfo = await fetchChallenge(id);
         //get question form info
-        setQuestions(newQuestions);
+        // setQuestions(challengeInfo.quiz);
         setUserAnswers([])
         setQuestionNumber(0)
         setStartTime(new Date());
@@ -131,4 +150,4 @@ const Button = styled.button`
     
     margin-bottom: 2%;
 `;
-export default Trivia
+export default Challenge
