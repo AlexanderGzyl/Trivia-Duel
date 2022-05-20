@@ -10,7 +10,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const Arena = () => {
     //app contexts
-    const {questions,time,score, setQuizID, quizID} = useContext(QuizContext);
+    const {questions,time,score, setQuizID, quizID,category} = useContext(QuizContext);
     const {user} = UserAuth();
     //state
     const [arenaUsers, setArenaUsers] = useState([]);
@@ -62,7 +62,9 @@ const Arena = () => {
         _id: quizID,
         quizID: quizID,
         user: user.email,
-        completed:false
+        completed:false,
+        category:category,
+        
     };
     //submit challenges
     const submitChallenge = () => {

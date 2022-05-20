@@ -13,9 +13,12 @@ const Header = () =>{
     return(
 <Wrapper>
     
-    {user?.displayName ? <LogOut/>:
-    <Link to ='/signin'>Login</Link>}
-    <p>Welcome {user?.displayName}</p>
+    {user?.displayName ? 
+    <HeaderContent>
+    <LogOut/>
+    </HeaderContent>:
+    null}
+    
 </Wrapper>
     )
 
@@ -24,7 +27,14 @@ const Header = () =>{
 const Wrapper = styled.div`
 grid-row: 1;
 color:white;  
-background-color: Black;
+background-color: black;
 `;
+
+const HeaderContent = styled.div`
+    max-width:100%;
+    
+    
+`
+
 
 export default Header

@@ -3,7 +3,7 @@ import React, { useEffect,useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from '../Context/AuthContext'
-
+import Signin from "../SignIn/SignIn";
 //to do
 //add names and keyboard nav too buttons
 const HomePage = () =>{
@@ -12,7 +12,34 @@ const HomePage = () =>{
    
 
     //Handlers
-    
+    useEffect(() => {
+        console.log(user)
+        if (user != null) {
+          //check if user exists and/or create user
+          //user data
+    let data = {
+      _id: user.uid,
+      challenges: [],
+      email: user.email,
+      wins:0,
+      losses:0,
+      quizzes:[]
+    };
+          fetch('/add-user', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          if (!res.status ==='200') {
+            throw Error("Server Error");
+          }
+          navigate('/')
+          return res.json();
+        })
+        .then(data => console.log(data.message))
+        }
+      }, [user]);
     //Navigate to the trivia page based on the category chosen
     //The button id is passed as state to the next page 
     //in order to fetch the correct category fromm the api
@@ -27,6 +54,8 @@ return(
     <Wrapper>
         <Content>
             <Logo>banner/img/logo</Logo>
+            {user?.displayName ? 
+            <>
             <Prompt>Select a category</Prompt>
             <Button id = "history"
                     tabIndex="0"
@@ -45,6 +74,8 @@ return(
                     aria-label="Culture Category" 
                     type="button"   
                     onClick={ (event)=>handleCategoryNav(event)}>Culture</Button>
+                    </>:
+            <Signin></Signin>}
         </Content>
     </Wrapper>
 )
@@ -55,6 +86,7 @@ return(
 const Wrapper = styled.div`
 grid-row: 2;
 overflow-y: auto;
+background-color:#041122;
 `;
 
 const Content = styled.div`
@@ -66,14 +98,14 @@ text-align:center;
 const Logo = styled.div`
     height:10vw;
     width:80vw;
-   
+    color:white;
     margin:2% 0% 5% 0%;
 `;
 const Prompt = styled.div`
     font-size:20px;
     height:10vw;
     width:80vw;
-    
+    color:#FFC6A9;
     margin-bottom: 15%;
 `;
 
@@ -84,11 +116,20 @@ const Button = styled.button`
     width:80vw;
     margin-bottom: 2%;
     }
+
     font-size:30px;
     height:20vw;
     width:50vw;
-    
+    background:rgba(255,255,255,0.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border-top:1px solid rgba(255,255,255,0.1);
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
     margin-bottom: 2%;
+    
+   
+    
 `;
 
 export default HomePage

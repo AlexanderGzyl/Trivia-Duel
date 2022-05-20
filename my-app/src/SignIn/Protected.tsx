@@ -6,7 +6,7 @@ const Protected = ({children}) => {
     const {user} = UserAuth();
     if (!user) {
         console.log(user)
-        return<Navigate to ='/signin'/>
+        return<Navigate to ='/'/>
     }
 return(
     children
