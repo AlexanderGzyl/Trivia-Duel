@@ -11,7 +11,7 @@ import { QuizContext } from "../Context/QuizContext";
 //start button disappears and begins the timer
 //fetch the quiz data on render
 const Trivia = () =>{
-    const {questions, setQuestions,setTime,score,setScore} = useContext(QuizContext);
+    const {questions, setQuestions,setTime,score,setScore,setCategory} = useContext(QuizContext);
     const navigate = useNavigate()
     //states
     //states trigger rerender
@@ -35,6 +35,7 @@ const Trivia = () =>{
         setScore(0)
         //fetch questions
         const newQuestions = await fetchQuizQuestions(location.state);
+        setCategory(location.state)
         setQuestions(newQuestions);
         setUserAnswers([])
         setQuestionNumber(0)

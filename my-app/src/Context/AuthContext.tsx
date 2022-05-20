@@ -15,6 +15,9 @@ export const AuthContextProvider = ({children})=> {
     //sign in
     const googleSignIn =()=>{
         const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account'
+        });
         signInWithRedirect(auth,provider);
     }
     const logOut = () => {

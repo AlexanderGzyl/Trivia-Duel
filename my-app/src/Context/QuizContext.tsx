@@ -8,6 +8,7 @@ const QuizProvider = ({children}) => {
     const [questions, setQuestions] = useState([]);
     const [score, setScore] = useState(0);
     const [time, setTime] = useState([]);
+    const [category, setCategory] = useState([]);
 
 
 return(
@@ -19,7 +20,9 @@ return(
             score,
             setScore,
             time,
-            setTime
+            setTime,
+            category,
+            setCategory
             }}>
         {children}
     </QuizContext.Provider>
