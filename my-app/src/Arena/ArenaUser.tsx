@@ -11,16 +11,6 @@ return(
 export default ArenaUser
 
 //styles
-const Wrapper = styled.div`
-grid-row: 2;
-overflow-y: auto;
-`;
-const Content = styled.div`
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-`;
 const Button = styled.span`
 @media (max-width: 768px){
     height:20vw;
@@ -30,6 +20,6 @@ const Button = styled.span`
     font-size:30px;
     height:10vh;
     width:30vw;
-    
+    color:white;
     margin-bottom: 2%;
 `;

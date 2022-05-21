@@ -140,7 +140,7 @@ const Challenge = () =>{
             headers: { "Content-Type": "application/json" },
         });
         
-
+        navigate("/")
     }
 
     return(
@@ -159,13 +159,13 @@ const Challenge = () =>{
     )}
 
 {!gameOver && !loading && userAnswers.length === questionNumber + 1 ? (
-        <button onClick={nextQuestion}>
+        <NextButton onClick={nextQuestion}>
             Next Question
-        </button>
+        </NextButton>
         ) : null}
 {gameOver && !loading && userAnswers.length === 5 ? (
 <Button onClick ={Result}>
-    enter arena
+    Complete Challenge
 </Button>) : null}
 </Content>
 </Wrapper>
@@ -176,23 +176,74 @@ const Challenge = () =>{
 const Wrapper = styled.div`
 grid-row: 2;
 overflow-y: auto;
+overflow-x: hidden;
+background-color: black;
 `;
 const Content = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
 text-align:center;
+justify-content:center;
 `;
 const Button = styled.button`
-@media (max-width: 768px){
+font-size:1.7em;
     height:20vw;
-    width:80vw;
-    margin-bottom: 2%;
+    width:40vw;
+    background-color:black;
+    color:#DF740C ;
+    cursor:pointer;
+    text-decoration:none;
+    margin-bottom: 5vh;
+    border: #DF740C  0.05em solid;
+    border-radius: 0.25em;
+    &:hover, :focus{
+    outline:0;
+    text-decoration:none;
+    border: #DF740C  0.125em solid;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#DF740C ;
+    box-shadow:
+    0 0 0.3em 0 #DF740C ,
+    inset 0 0 0.3em 0 #DF740C  ;
+    position:relative;
+    &:before{
+        content:'';
+        position:absolute;
+        background: #DF740C ;
+        height:20%;
+        width:100%;
+        top:116%;
+        left:0;
+        transform: perspective(1em) rotateX(40deg);
+        filter: blur(0.3em);
+        opacity:0.7;
     }
-    font-size:30px;
-    height:20vw;
-    width:50vw;
-    
-    margin-bottom: 2%;
+    }
 `;
+const NextButton = styled.button`
+    font-size:1.7em;
+    height:10vh;
+    width:40vw;
+    background-color:black;
+    color:#0C77DF ;
+    cursor:pointer;
+    text-decoration:none;
+    margin-bottom: 5vh;
+    border: #0C77DF  0.05em solid;
+    border-radius: 0.25em;
+    &:hover, :focus{
+    outline:0;
+    text-decoration:none;
+    border: #0C77DF 0.125em solid;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#0C77DF ;
+    box-shadow:
+    0 0 0.3em 0 #0C77DF ,
+    inset 0 0 0.3em 0 #0C77DF  ;
+    }
+
+`
 export default Challenge

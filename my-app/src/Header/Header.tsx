@@ -190,6 +190,13 @@ const TitleContainer = styled.div`
 display:flex;
 align-items:center;
 justify-content:center;
+&:after {
+    content:"";
+    background: -webkit-linear-gradient(left, #032d50 15%, #00a1ef 25%, white 45%, #20125f 55%, #8313e7 65%, #ff61af 90%);
+    height:2px;
+    width: 100vw;
+    position: absolute;
+    top: 70px;}
 `
 
 
