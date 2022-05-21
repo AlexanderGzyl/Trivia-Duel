@@ -4,17 +4,27 @@ import styled from "styled-components";
 import {Link} from 'react-router-dom';
 import { UserAuth } from '../Context/AuthContext';
 import LogOut from './LogOut';
+import { FaRegUserCircle} from 'react-icons/fa';
+
 
 
 //Header should have login logic with nav to profile page
 const Header = () =>{
     const {user, logOut} = UserAuth()
-  
     return(
 <Wrapper>
     
     {user?.displayName ? 
     <HeaderContent>
+        <ProfileContainer>
+        <StyledLink3 to ={`/profile/${user.uid}`}><FaRegUserCircle/></StyledLink3>
+        <StyledLink2 to ={`/profile/${user.uid}`}>{user?.displayName}</StyledLink2>
+        </ProfileContainer>
+        <StyledLink to ={'/'}><Logo>
+            <span>Trivia</span>
+            <span>Trivia</span>
+        </Logo>
+        </StyledLink>
     <LogOut/>
     </HeaderContent>:
     null}
@@ -32,8 +42,134 @@ background-color: black;
 
 const HeaderContent = styled.div`
     max-width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+`
+const Logo = styled.h1`
+
+position: relative;
+  font-size: 3.7em;
+  margin: 0;
+  transform: skew(-15deg);
+  letter-spacing: 0.03em;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: -0.1em;
+    right: 0.05em;
+    width: 0.4em;
+    height: 0.4em;
+    background: 
+      radial-gradient(white 3%, rgba(white, 0.3) 15%, rgba(white, 0.05) 60%, transparent 80%),
+      radial-gradient(rgba(white, 0.2) 50%, transparent 60%) 50% 50% / 5% 100%,
+      radial-gradient(rgba(white, 0.2) 50%, transparent 60%) 50% 50% / 70% 5%;
+    background-repeat: no-repeat;
+  }
+  
+  span:first-child {
+    display: block;
+    text-shadow: 0 0 0.1em #8ba2d0, 0 0 0.2em black,  0 0 5em #165ff3;
+    -webkit-text-stroke: 0.06em rgba(black, 0.5);
+  }
+  
+  span:last-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(#032d50 15%, #00a1ef 25%, white 40%, #20125f 40%, #8313e7 45%, #ff61af 65%);
+    -webkit-text-stroke: 0.01em #94a0b9;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+`
+const StyledLink = styled(Link)`
+text-decoration:none;
+color:white;
+font-size:20px;
+`;
+const StyledLink2 = styled(Link)`
+  @media (max-width: 768px){
+      display: none;}
     
-    
+    font-size:20px;
+    background-color:black;
+    color:#DF740C;
+    cursor:pointer;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    border-radius: 0.25em;
+    height:35px;
+    padding: 0.5vw 1vw 0 1vw;
+    &:hover, :focus{
+    outline:0;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#DF740C;
+    box-shadow:
+    0 0 0.4em 0 #DF740C,
+    inset 0 0 0.4em 0 #DF740C;
+    position:relative;
+    &:before{
+        content:'';
+        position:absolute;
+        background: #DF740C;
+        height:20%;
+        width:100%;
+        top:120%;
+        left:0;
+        transform: perspective(1em) rotateX(40deg);
+        filter: blur(0.3em);
+        opacity:0.7;
+    }
+    }
+`;
+const StyledLink3 = styled(Link)`
+@media (min-width: 768px){
+    display: none;}
+    font-size:20px;
+    background-color:black;
+    color:#DF740C;
+    cursor:pointer;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    border-radius: 0.25em;
+    height:35px;
+    padding: 0 1vw;
+    &:hover, :focus{
+    outline:0;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#DF740C;
+    box-shadow:
+    0 0 0.4em 0 #DF740C,
+    inset 0 0 0.4em 0 #DF740C;
+    position:relative;
+    &:before{
+        content:'';
+        position:absolute;
+        background: #DF740C;
+        height:20%;
+        width:100%;
+        top:120%;
+        left:0;
+        transform: perspective(1em) rotateX(40deg);
+        filter: blur(0.3em);
+        opacity:0.7;
+    }
+    }
+`;
+
+const ProfileContainer = styled.div`
+padding-left:5vw;
+display:flex;
+align-items:center;
 `
 
 

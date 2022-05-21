@@ -171,7 +171,19 @@ const updateChallenge = async (req, res) => {
       const result3 = await db.collection("users").updateOne(query3,updateDocument3);
       res.status(200).json({ status: 201,message: "user added", data: result2 });
     } else {
-            //update challenge userID,challengeId
+      //update challenge userID,challengeId
+      let query = {
+        "_id": userId
+      }
+      let updateDocument = {
+        $pull: {
+          challenges: {
+            "_id": challengeId
+          }
+        }
+      }
+      const result = await db.collection("users").updateOne(query,updateDocument);
+      console.log(result)
       //add win challengerID
       let query2 = {_id:challengerId}
       let updateDocument2 ={

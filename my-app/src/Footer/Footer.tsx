@@ -4,14 +4,21 @@ import styled from "styled-components";
 import {useLocation} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
+
+
+
 //Footer will have navigation to the HomePage for easy access on mobile
 const Footer = () =>{
     const location = useLocation();
+    
 //either conditionally render or reset quiz context on click
 
     return(
         <Wrapper>
-            <StyledLink to ={"/"}>HOME</StyledLink>
+            <FooterContent>
+            
+            
+            </FooterContent>
         </Wrapper>
     )
 
@@ -22,12 +29,14 @@ grid-row: 3;
 color:white;
 background-color: black;
 `;
-const StyledLink = styled(Link)`
-text-decoration: none;
-color:orange;
-max-height:50%;
-max-width:50%;
-background-color:blue;
-`;
+
+const FooterContent = styled.div`
+    display:flex;
+    justify-content:end;
+    padding-top:45px;
+    font-size:13px;
+    color:#DF740C;
+`
+
 
 export default Footer
