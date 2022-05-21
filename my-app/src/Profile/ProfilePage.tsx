@@ -147,10 +147,11 @@ background-color:red;
 
 `;
 const LoaderWrapper = styled.div`
-height: 100vh;
-display: flex;
-align-items: center;
-justify-content: center;
 text-align: center;
+display: flex;
+justify-content: center;
+align-items:center;
+background-color:black;
+
 `
 export default ProfilePage
