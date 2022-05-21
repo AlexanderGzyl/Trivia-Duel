@@ -3,6 +3,7 @@ import React from 'react';
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
 import { UserAuth } from '../Context/AuthContext';
+import { IoMdLogOut } from 'react-icons/io';
 
 
 //Header should have login logic with nav to profile page
@@ -17,7 +18,7 @@ const LogOut = () =>{
     }
     return(
         <Wrapper>
-            <StyledLink to ={`/profile/${user.uid}`}>{user?.displayName}</StyledLink>
+            <StyledButton2 onClick = {handleSignOut}><IoMdLogOut/></StyledButton2>
             <StyledButton onClick = {handleSignOut}>Logout</StyledButton>
         </Wrapper>
 
@@ -26,26 +27,89 @@ const LogOut = () =>{
 }
 
 const Wrapper = styled.div`
+padding-right:5vw;
 display:flex;
 align-items:center;
-justify-content:space-between;
-line-height: 2.5;
-padding:0 10%;
 `;
 const StyledButton = styled.button`
-background-color:#FFC6A9;
-max-height:50%;
-max-width:60%;
+@media (max-width: 768px){
+      display: none;}
+    
+    font-size:20px;
+    background-color:black;
+    color:#DF740C;
+    cursor:pointer;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    border-radius: 0.25em;
+    height:35px;
+    padding: 0 1vw;
+    &:hover, :focus{
+    outline:0;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#DF740C;
+    box-shadow:
+    0 0 0.4em 0 #DF740C,
+    inset 0 0 0.4em 0 #DF740C;
+    position:relative;
+    &:before{
+        content:'';
+        position:absolute;
+        background: #DF740C;
+        height:20%;
+        width:100%;
+        top:120%;
+        left:0;
+        transform: perspective(1em) rotateX(40deg);
+        filter: blur(0.3em);
+        opacity:0.7;
+    }
+    }
+
+`;
+const StyledButton2 = styled.button`
+@media (min-width: 768px){
+    display: none;}
+
+    font-size:20px;
+    background-color:black;
+    color:#DF740C;
+    cursor:pointer;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    border-radius: 0.25em;
+    height:35px;
+    padding: 0 1vw;
+    &:hover, :focus{
+    outline:0;
+    text-decoration:none;
+    border: #DF740C 0.05em solid;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#DF740C;
+    box-shadow:
+    0 0 0.4em 0 #DF740C,
+    inset 0 0 0.4em 0 #DF740C;
+    position:relative;
+    &:before{
+        content:'';
+        position:absolute;
+        background: #DF740C;
+        height:20%;
+        width:100%;
+        top:120%;
+        left:0;
+        transform: perspective(1em) rotateX(40deg);
+        filter: blur(0.3em);
+        opacity:0.7;
+    }
+    }
+
 `;
 
-const StyledLink = styled(Link)`
-text-decoration: none;
-color:#FFC6A9;
-max-height:50%;
-max-width:50%;
-
-
-`;
 
 
 export default LogOut
