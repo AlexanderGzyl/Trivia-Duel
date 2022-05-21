@@ -18,7 +18,7 @@ transform: rotate(360deg)
 
 const RotateFiLoader = styled(FiLoader)`
 animation: ${Rotate} 2500ms linear infinite;
-color: blue;
+color: #0C77DF;
 width: 100px;
 height: 100px;
 `

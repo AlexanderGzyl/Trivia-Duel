@@ -4,47 +4,73 @@ import styled from "styled-components";
 
 
 const TriviaCard = ({answers, userAnswer, callback,question}) => {
+  let gg = userAnswer ? true : false
+  console.log(gg)
     return(
-    <Wrapper>
-      <Content>
+    <Content >
     <Question>{question}</Question>
-    <div>
+    
       {answers.map((answer) => (
           
         <ButtonWrapper
           key={answer}
+          correct={userAnswer?.correctAnswer === answer}
+          userClicked={userAnswer?.answer === answer}
         >
-          <button disabled={userAnswer ? true : false} value={answer} onClick={callback}>
+          <AnswerButton disabled={userAnswer ? true : false} value={answer} onClick={callback}>
               {answer}
-          </button>
+          </AnswerButton>
         </ButtonWrapper>
         
       ))}
-    </div>
+    
     </Content>
-    </Wrapper>
+    
     )
 }
+
+const ButtonWrapper = styled.div`
+  @media (min-width: 768px){
+    max-width:50vw;}
+    max-height:10vh;
+    max-width:90vw;
+    margin-bottom: 2vh;
+    & :disabled {
+      cursor: not-allowed;
+      border: ${({ correct, userClicked }) =>
+      correct
+        ? 'green  0.1em solid;'
+        : !correct && userClicked
+        ? 'red  0.1em solid;'
+        : '#DF740C  0.05em solid;'};
+    }
+`
 const Content = styled.div`
 display:flex;
 flex-direction:column;
 align-items:center;
-text-align:center;
 `;
-const Wrapper = styled.div`
-grid-row: 2;
-overflow-y: auto;
-`;
-const ButtonWrapper = styled.div`
-    width: 100%;
-    height: 40px;
-    grid-row: 2;
-    overflow-y: auto;
-`
 const Question = styled.div`
+@media (min-width: 768px){
+  height:5vw;}
+    font-size:1.3em;
     height:20vw;
-    width:80vw;
-    margin-bottom: 2%;
+    color:white;
+    margin:1vh 0 0 2vh;
+`
+const AnswerButton = styled.button`
+@media (min-width: 768px){
+    max-width:50vw;}
+    font-size:1.7em;
+    height:10vh;
+    width:90vw;
+    background-color:black;
+    color:#DF740C ;
+    cursor:pointer;
+    text-decoration:none;
+    border: #DF740C  0.05em solid;
+    border-radius: 0.25em;
+    
 `
 
 

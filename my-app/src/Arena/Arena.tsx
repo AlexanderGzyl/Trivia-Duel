@@ -109,6 +109,7 @@ const Arena = () => {
 const Wrapper = styled.div`
 grid-row: 2;
 overflow-y: auto;
+background-color:black;
 `;
 const Content = styled.div`
 display:flex;

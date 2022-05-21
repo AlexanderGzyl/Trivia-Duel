@@ -1,8 +1,6 @@
 // @ts-nocheck
 import React from 'react';
 import styled from "styled-components";
-import {useLocation} from 'react-router-dom';
-import {Link} from 'react-router-dom';
 import { AiFillInstagram } from "react-icons/ai";
 import { AiFillFacebook } from "react-icons/ai";
 import { AiFillTwitterCircle } from "react-icons/ai";
@@ -10,12 +8,8 @@ import { AiFillTwitterCircle } from "react-icons/ai";
 
 
 
-//Footer will have navigation to the HomePage for easy access on mobile
-const Footer = () =>{
-    const location = useLocation();
-    
-//either conditionally render or reset quiz context on click
 
+const Footer = () =>{
     return(
         <Wrapper>
             <FooterContent>
@@ -40,7 +34,6 @@ const FooterContent = styled.div`
     justify-content:flex-start;
     padding-top:45px;
     font-size:13px;
-    
 `
 
 
