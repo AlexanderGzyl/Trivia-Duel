@@ -49,7 +49,8 @@ flex-direction:row;
 text-align:left;
 margin:2vh 0;
 color:white;
-
+border-bottom: #232b2b 0.05em solid;
+box-shadow: 0 0.3em 2px -2px #DF740C;
 justify-content: space-evenly;
 `
 const Button = styled.button`
@@ -93,5 +94,9 @@ const ChallengeText = styled.div`
     }
     max-width:40%;
     font-size:1.3em;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#0C77DF;
+    
 
 `

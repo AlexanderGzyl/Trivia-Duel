@@ -2,7 +2,7 @@
 import React from 'react';
 import { GoogleButton } from 'react-google-button';
 import { UserAuth } from '../Context/AuthContext'
-
+import styled from "styled-components";
 
 
 const Signin = () => {
@@ -19,11 +19,16 @@ const Signin = () => {
 
 
   return (
-      <div >
+      <Wrapper  >
         <GoogleButton onClick={handleGoogleSignIn} />
-      </div>
+      </Wrapper >
   );
 };
+
+const Wrapper = styled.div`
+  margin-top:5vh;
+
+`
 
 export default Signin;
 

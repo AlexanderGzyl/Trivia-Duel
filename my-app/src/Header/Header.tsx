@@ -27,7 +27,14 @@ const Header = () =>{
         </StyledLink>
     <LogOut/>
     </HeaderContent>:
-    null}
+    <TitleContainer >
+        <StyledLink to ={'/'}><Logo>
+            <span>Trivia</span>
+            <span>Trivia</span>
+        </Logo>
+        </StyledLink>
+    </TitleContainer >
+    }
     
 </Wrapper>
     )
@@ -46,6 +53,14 @@ const HeaderContent = styled.div`
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
+    &:after {
+    content:"";
+    background: -webkit-linear-gradient(left, #032d50 15%, #00a1ef 25%, white 45%, #20125f 55%, #8313e7 65%, #ff61af 90%);
+    height:2px;
+    width: 100vw;
+    position: absolute;
+    top: 70px;
+}
 `
 const Logo = styled.h1`
 
@@ -170,6 +185,11 @@ const ProfileContainer = styled.div`
 padding-left:5vw;
 display:flex;
 align-items:center;
+`
+const TitleContainer = styled.div`
+display:flex;
+align-items:center;
+justify-content:center;
 `
 
 

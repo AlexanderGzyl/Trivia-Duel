@@ -86,7 +86,29 @@ return(
                     type="button"   
                     onClick={ (event)=>handleCategoryNav(event)}>Culture</Button>
                     </>:
-            <Signin></Signin>}
+            
+            <>
+            <Signin></Signin>
+            <Prompt>Sign in to play!</Prompt>
+            <Button id = "history"
+                    tabIndex="0"
+                    aria-label="History Category"
+                    type="button"  
+                    onClick={ (event)=>handleCategoryNav(event)}>History</Button>
+            <Button id = "music"
+                    aria-label="Music Category"
+                    type="button"    
+                    onClick={ (event)=>handleCategoryNav(event)}>Music</Button>
+            <Button id = "film_and_tv"
+                    aria-label="Film Category"
+                    type="button"    
+                    onClick={ (event)=>handleCategoryNav(event)}>Film</Button>
+            <Button id = "society_and_culture"
+                    aria-label="Culture Category" 
+                    type="button"   
+                    onClick={ (event)=>handleCategoryNav(event)}>Culture</Button>
+                    </>
+            }
         </Content>
     </Wrapper>
 )
