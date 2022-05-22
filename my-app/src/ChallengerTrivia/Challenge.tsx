@@ -29,6 +29,7 @@ const Challenge = () =>{
     const [startTime,setStartTime] = useState([]);
     const [endTime,setEndtime] = useState([])
     const [data,setData] = useState([])
+    const [response,setResponse] = useState([])
     //constants
     //get selected Trivia category from homepage
     const location = useLocation();
@@ -112,13 +113,13 @@ const Challenge = () =>{
         setTime((endTime-startTime)/1000)
         if (score < data.score) {
             finalOutcome("lose")
-            
+            setResponse("woe to the conquered")
         } else if (score===data.score && time < data.time){
             finalOutcome("win")
-            
+            setResponse("You have won, O Galilean.")
         } else{
             finalOutcome("win")
-            
+            setResponse("You have won, O Galilean.")
         }
     }
 
@@ -140,7 +141,7 @@ const Challenge = () =>{
             headers: { "Content-Type": "application/json" },
         });
         
-        navigate("/")
+        
     }
 
     return(
@@ -163,9 +164,10 @@ const Challenge = () =>{
             Next Question
         </NextButton>
         ) : null}
-{gameOver && !loading && userAnswers.length === 5 ? (
+        {response.length>0 ?<Conclusion>{response}</Conclusion>:null}
+{response.length=== 0 && gameOver && !loading && userAnswers.length === 5 ? (
 <Button onClick ={Result}>
-    Complete Challenge
+    Challenge response
 </Button>) : null}
 </Content>
 </Wrapper>
@@ -186,6 +188,14 @@ align-items:center;
 text-align:center;
 justify-content:center;
 `;
+const Conclusion = styled.div`
+    color:white;
+    font-size:5em;
+    margin-top:30vh;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#0C77DF ;
+`
 const Button = styled.button`
 font-size:1.7em;
     height:20vw;
