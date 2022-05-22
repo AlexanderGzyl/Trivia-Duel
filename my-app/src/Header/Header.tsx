@@ -8,9 +8,9 @@ import { FaRegUserCircle} from 'react-icons/fa';
 
 
 
-//Header should have login logic with nav to profile page
+
 const Header = () =>{
-    const {user, logOut} = UserAuth()
+    const {user} = UserAuth()
     return(
 <Wrapper>
     

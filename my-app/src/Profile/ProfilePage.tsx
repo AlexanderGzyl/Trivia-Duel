@@ -4,25 +4,24 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Challenges from "./Challenges";
 import Loader from "../Utils/Loader";
-import { FaRegUserCircle} from 'react-icons/fa';
 import bust from '../Assets/Picture1.svg'
 
 const ProfilePage = () =>{
     const { id } = useParams();
     const [userInfo, setUserInfo] = useState([]);
-    const [loaded, setLoaded] = useState(false);
+    
 //get user info and quizzes by user
-console.log(typeof id)
+
     useEffect(() => {
         fetch(`/user/${id}`).then((response) =>
         response.json().then((json) => {
             setUserInfo(json.data);
-            setLoaded(true)
+            
         })
         );
     }, []);
-    console.log(userInfo)
-    console.log(userInfo.challenges)
+    // console.log(userInfo)
+    // console.log(userInfo.challenges)
     //loading
     // if(loaded === true) {
     //     fetch(`/get-quizzes/${id}`).then((response) =>
@@ -31,7 +30,7 @@ console.log(typeof id)
     //     })
     //     );
     // }
-    const iconStyle = {fontSize: "30vw"};
+    
     if(userInfo.challenges === undefined) {
         return (
             <LoaderWrapper>

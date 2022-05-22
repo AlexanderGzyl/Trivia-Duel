@@ -9,7 +9,7 @@ import { AuthContextProvider } from './Context/AuthContext';
 import UserProvider from './Context/UserContext'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  
     <AuthContextProvider>
     <UserProvider>
     <QuizProvider>
@@ -17,7 +17,7 @@ root.render(
     </QuizProvider>
     </UserProvider>
     </AuthContextProvider>
-  </React.StrictMode>
+  
 );
 
 // If you want your app to work offline and load faster, you can change

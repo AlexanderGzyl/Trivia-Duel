@@ -5,10 +5,8 @@ import styled from "styled-components";
 
 const ChallengeCard = ({answers, userAnswer, callback,question}) => {
     return(
-    
       <Content>
     <Question>{question}</Question>
-    
       {answers.map((answer) => (
           
         <ButtonWrapper
@@ -22,11 +20,11 @@ const ChallengeCard = ({answers, userAnswer, callback,question}) => {
         </ButtonWrapper>
         
       ))}
-    
     </Content>
     
     )
 }
+//styles
 const Content = styled.div`
 display:flex;
 flex-direction:column;

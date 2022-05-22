@@ -43,10 +43,9 @@ const HomePage = () =>{
             }
         //prevents refetch
         setDataExported(true)
-        
         return res.json();
         })
-        .then(data => console.log(data.message))
+        // .then(data => console.log(data.message))
         }
     }, [user]);
     //functions
@@ -113,9 +112,8 @@ return(
     </Wrapper>
 )
 
-
 }
-
+//styles
 const Wrapper = styled.div`
 grid-row: 2;
 overflow-y: auto;

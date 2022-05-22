@@ -17,7 +17,7 @@ const Arena = () => {
     const [arenaUsers, setArenaUsers] = useState([]);
     const [challenges,setChallenges] = useState([]);
     const navigate = useNavigate()
-    //fetch arena users and create quiz payload
+    //fetch arena users from mongodb and create quiz payload
     useEffect(() => {
         setQuizID(uuidv4())
         
@@ -36,6 +36,7 @@ const Arena = () => {
             console.error('Error', err);
         })
     }, []);
+    //quiz information payload
     let data = {
         _id: quizID,
         quiz: questions,
@@ -44,7 +45,7 @@ const Arena = () => {
         score:score,
         time:time
     };
-    //handlers
+    
     //post quiz to data base
     const challenge = () => {
         fetch('/add-quiz', {
@@ -53,13 +54,12 @@ const Arena = () => {
             headers: { "Content-Type": "application/json" },
         });
     }
-    //add challenger
+    //add challengers
     const addChallenge = (event:any) =>{
         let id = event.currentTarget.id;
         setChallenges(prev => [...prev, id])
-        
     }
-
+    //challengers information payload
     let challengeData = {
         challengers:challenges,
         _id: quizID,
@@ -69,7 +69,7 @@ const Arena = () => {
         category:category,
         
     };
-    //submit challenges
+    //submit challenges to mongoDB 
     const submitChallenge = () => {
         fetch('/add-challenges', {
             method: 'PATCH',
@@ -78,7 +78,7 @@ const Arena = () => {
         });
     }
 
-    //submihandler
+    //submit handler
     const handleSubmit = () => {
         challenge();
         submitChallenge()
@@ -128,12 +128,10 @@ const Button = styled.button`
 @media (max-width: 768px){
     height:10vh;
     width:40vw;
-    
     }
     font-size:1.1em;
     height:10vh;
     width:20vw;
-    
     background-color:black;
     color:#DF740C;
     cursor:pointer;
@@ -190,6 +188,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 text-align: center;
+background-color:black;
 `
 const Title =styled.div`
     @media (min-width: 768px){

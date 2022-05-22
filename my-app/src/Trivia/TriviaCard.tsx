@@ -4,8 +4,7 @@ import styled from "styled-components";
 
 
 const TriviaCard = ({answers, userAnswer, callback,question}) => {
-  let gg = userAnswer ? true : false
-  console.log(gg)
+  
     return(
     <Content >
     <Question>{question}</Question>

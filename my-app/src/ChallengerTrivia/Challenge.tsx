@@ -1,26 +1,19 @@
 // @ts-nocheck
-import React, { useState,useContext,useEffect } from "react"
-import {useLocation} from 'react-router-dom';
+import React, { useState,useContext } from "react"
 import styled from "styled-components";
 import { fetchChallenge } from "./FetchChallenge";
 import ChallengeCard from "./ChallengeCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { QuizContext } from "../Context/QuizContext";
 import { UserAuth } from "../Context/AuthContext";
 
-//add start button
-//start button disappears and begins the timer
-//fetch the quiz data on render
 const Challenge = () =>{
+    //quiz context
     const {questions, setQuestions,setTime,time,score,setScore} = useContext(QuizContext);
-    const navigate = useNavigate()
     //quiz id
     const { id } = useParams();
     const {user} = UserAuth();
-   
     //states
-    //states trigger rerender
-    //use reducers?memo?break up state and functions
     const [loading, setLoading] = useState(false);
     const [gameOver, setGameOver] = useState(true);
     const [userAnswers,setUserAnswers] = useState([]);
@@ -30,26 +23,8 @@ const Challenge = () =>{
     const [endTime,setEndtime] = useState([])
     const [data,setData] = useState([])
     const [response,setResponse] = useState([])
-    //constants
-    //get selected Trivia category from homepage
-    const location = useLocation();
-    // useEffect(() => {
-    //     fetch(`/get-quiz/${id}`)
-    //     .then((res) => {
-    //         if (res.ok) {
-    //             return res.json();
-    //         } else {
-    //             throw new Error(`Error! status: ${res.status}`);
-    //         }
-    //     })
-    //     .then((data) => {
-    //         console.log(data.data.quiz)
-    //         setQuestions(data.data.quiz)
-    //     })
-    //     .catch((err) => {
-    //         console.error('Error', err);
-    //     })
-    // }, []);
+    
+    
     //functions
     const startTrivia = async () => {
         
@@ -99,12 +74,7 @@ const Challenge = () =>{
     }
 
     const Result = () => {
-        console.log(userAnswers)
         compareScore()
-        // setTime((endTime-startTime)/1000)
-        console.log(score)
-        console.log(data.score)
-        console.log(data.time)
         //compare scores function
         //update challenge to complete and update win lose for user and challenger in patch
     }
@@ -174,7 +144,7 @@ const Challenge = () =>{
     )
 
 }
-
+//styles
 const Wrapper = styled.div`
 grid-row: 2;
 overflow-y: auto;

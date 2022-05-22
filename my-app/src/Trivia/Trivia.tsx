@@ -11,7 +11,7 @@ import { QuizContext } from "../Context/QuizContext";
 //start button disappears and begins the timer
 //fetch the quiz data on render
 const Trivia = () =>{
-    const {questions, setQuestions,setTime,score,setScore,setCategory} = useContext(QuizContext);
+    const {questions, setQuestions,setTime,setScore,setCategory} = useContext(QuizContext);
     const navigate = useNavigate()
     //states
     //states trigger rerender
@@ -74,9 +74,8 @@ const Trivia = () =>{
     }
 
     const Result = () => {
-        console.log(userAnswers)
         setTime((endTime-startTime)/1000)
-        console.log(score)
+        
         //navigate to arena
         navigate("/arena")
         //put setTime in quizcontext

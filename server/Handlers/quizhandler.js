@@ -17,12 +17,10 @@ const getQuiz = async (req,res) => {
     const db = client.db("finalproject");
     console.log("Connected");
     const _id   = req.params.id;
-    console.log(req.params.id)
-    console.log(typeof _id)
     try {
         //get the data from server
         const results = await db.collection("quizzes").findOne({ _id });
-        console.log(results)
+        
         //reformat(routes) as input
         
         //find will return an empty array if it doesn't find anything...
@@ -45,13 +43,13 @@ const getQuizzes = async (req, res) => {
     const db = client.db("finalproject");
     console.log("Connected");
     const _id   = req.params.id;
-    console.log(_id)
+    
     const query = { "userID": `${ _id }`};
-    console.log(query)
+    
     try {
         //get the data from server
         const results = await db.collection("quizzes").find(query).toArray();
-        console.log(results)
+        
         //reformat(routes) as input
         
         //find will return an empty array if it doesn't find anything...

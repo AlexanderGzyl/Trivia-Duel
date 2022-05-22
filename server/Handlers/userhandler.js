@@ -8,8 +8,7 @@ const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 };
-// use this package to generate unique ids: https://www.npmjs.com/package/uuid
-const { v4: uuidv4 } = require("uuid");
+
 
 //upon google sign in check if user is in database if not add them
 //////////////////////////////////////////////////////////////////////
@@ -27,13 +26,13 @@ const addUser = async (req, res) => {
 
     try {
       const result = await db.collection("users").findOne({ _id });
-      console.log(result)
+      
       if (result === null) {
         await db.collection("users").insertOne(user);
         res.status(201).json({ status: 201,message: "user added", data: user });
-        console.log("added")
+        
     } else {
-        console.log("user exists")
+        
         res.status(200).json({ status: 200,message: "user exists already", data: user });
     }
     } catch (err) {
@@ -53,7 +52,7 @@ const getArenaUsers = async (req, res) => {
     const db = client.db("finalproject");
     console.log("Connected");
     const username   = req.params._id;
-    console.log(username)
+    
     let query ={};
     query = {
         "_id": {
@@ -86,7 +85,7 @@ const addChallenge = async (req, res) => {
     await client.connect();
     const db = client.db("finalproject");
     console.log("Connected");
-    console.log(req.body) 
+
     const {challengers,_id,quizID,user,completed } = req.body;
     let payload = {
         _id : _id,
@@ -99,7 +98,7 @@ const addChallenge = async (req, res) => {
 
     try {
       const result = await db.collection("users").updateMany(query,updateDocument);
-      console.log(result)
+      
         res.status(200).json({ status: 201,message: "user added", data: result });
       
     } catch (err) {
@@ -126,7 +125,7 @@ const getUser = async (req, res) => {
         res.status(404).json({ status: 404, error: "user doesn't exist" });
       }else
         {res.status(200).json({status: 200,_id, data: result});}
-        console.log("success")
+        
     } catch (err) {
       console.log(err);
     }
@@ -139,7 +138,7 @@ const updateChallenge = async (req, res) => {
   await client.connect();
   const db = client.db("finalproject");
   console.log("Connected");
-  console.log(req.body) 
+  
   const {challengerId,userId,challengeId,outcome} = req.body;
 
 
@@ -183,7 +182,7 @@ const updateChallenge = async (req, res) => {
         }
       }
       const result = await db.collection("users").updateOne(query,updateDocument);
-      console.log(result)
+      
       //add win challengerID
       let query2 = {_id:challengerId}
       let updateDocument2 ={

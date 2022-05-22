@@ -14,6 +14,7 @@ export const AuthContextProvider = ({children})=> {
     const [user, setUser] = useState(null)
     //sign in
     const googleSignIn =()=>{
+        //authorization provider for google
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({
             prompt: 'select_account'
@@ -22,9 +23,8 @@ export const AuthContextProvider = ({children})=> {
     }
     const logOut = () => {
         signOut(auth)
-        console.log("bye")
     }
-    //
+    //an observer for the users sign in state(are users signed in or out)
     useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
         setUser(currentUser)

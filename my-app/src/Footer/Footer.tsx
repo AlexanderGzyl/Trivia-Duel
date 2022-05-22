@@ -22,7 +22,7 @@ const Footer = () =>{
     )
 
 }
-
+//styles
 const Wrapper = styled.div`
 grid-row: 3;
 color:white;

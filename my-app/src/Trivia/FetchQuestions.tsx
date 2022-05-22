@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { shuffleArray } from "./TriviaUtils";
 
 export const fetchQuizQuestions = async (category) => {

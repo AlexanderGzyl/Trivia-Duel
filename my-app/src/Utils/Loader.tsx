@@ -24,5 +24,6 @@ text-shadow:
     0 0 0.45em#0C77DF ;
 width: 100px;
 height: 100px;
+background-color:black;
 `
 export default Loader;
