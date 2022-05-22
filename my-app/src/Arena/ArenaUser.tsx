@@ -3,23 +3,24 @@ import React, { useContext,useEffect,useState } from "react"
 import styled from "styled-components";
 
 const ArenaUser = ({arenaUser}) => {
-
+    let username = arenaUser.split("@")[0];
 return(
-    <Button>{arenaUser}</Button>
+    <ChallengeText>{username}</ChallengeText>
 )}
 
 export default ArenaUser
 
 //styles
-const Button = styled.span`
+const ChallengeText = styled.div`
 @media (max-width: 768px){
-    height:20vw;
-    width:80vw;
-    margin-bottom: 2%;
+    width:30%;
     }
-    font-size:30px;
-    height:10vh;
-    width:30vw;
+    width:40%;
+    font-size:1.1em;
+    text-shadow: 
+    0 0 0.125em hsla(0,0%,100%,0.5),
+    0 0 0.45em#0C77DF;
     color:white;
-    margin-bottom: 2%;
-`;
+    padding-top:6vh;
+
+`
