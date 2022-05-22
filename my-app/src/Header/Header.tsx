@@ -55,7 +55,7 @@ const HeaderContent = styled.div`
     align-items:center;
     &:after {
     content:"";
-    background: -webkit-linear-gradient(left, #032d50 15%, #00a1ef 25%, white 45%, #20125f 55%, #8313e7 65%, #ff61af 90%);
+    background: -webkit-linear-gradient(left, #00FFE4 0%, #0C969A 14%, #243863 28%, #450D44 42%, #740030 56%, #B0151E 70%, #F1570D 84%);
     height:2px;
     width: 100vw;
     position: absolute;
@@ -86,7 +86,7 @@ position: relative;
   
   span:first-child {
     display: block;
-    text-shadow: 0 0 0.1em #8ba2d0, 0 0 0.2em black,  0 0 5em #165ff3;
+    text-shadow: 0 0 0.1em #00FFE4, 0 0 0.2em black,  0 0 5em #00FFE4;
     -webkit-text-stroke: 0.06em rgba(black, 0.5);
   }
   
@@ -94,7 +94,7 @@ position: relative;
     position: absolute;
     left: 0;
     top: 0;
-    background-image: linear-gradient(#032d50 15%, #00a1ef 25%, white 40%, #20125f 40%, #8313e7 45%, #ff61af 65%);
+    background-image: linear-gradient(#00FFE4 0%, #0C969A 14%, #243863 28%, #450D44 42%, #740030 56%, #B0151E 70%, #F1570D 84%);
     -webkit-text-stroke: 0.01em #94a0b9;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -192,7 +192,7 @@ align-items:center;
 justify-content:center;
 &:after {
     content:"";
-    background: -webkit-linear-gradient(left, #032d50 15%, #00a1ef 25%, white 45%, #20125f 55%, #8313e7 65%, #ff61af 90%);
+    background: -webkit-linear-gradient(left,#00FFE4 0%, #0C969A 14%, #243863 28%, #450D44 42%, #740030 56%, #B0151E 70%, #F1570D 84%);
     height:2px;
     width: 100vw;
     position: absolute;
